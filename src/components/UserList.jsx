@@ -23,11 +23,11 @@ export default function UserList({firstTeam, setTeams, teams}) {
     },[team])
 
     return (
-        <div className="border w-[20vw] border-gray-600 rounded-md"
+        <div className="border lg:w-[20vw] border-gray-600 rounded-md"
         >
             <div className="flex justify-between pt-2 pb-1 px-2">
                 <p>{firstTeam ? <>List 1</> : <>List 2</>}</p>
-                <input type="number" value={team.length} className="bg-neutral-800 px-2 py-1 text-sm rounded-sm" placeholder="Number of Players" onChange={(e)=>setPlayers(e.target.value)}/>
+                <input type="number" value={team.length} className="bg-neutral-800 px-2 py-1 text-sm rounded-sm max-w-[12vw]" placeholder="Number of Players" onChange={(e)=>setPlayers(e.target.value)}/>
             </div>
             <hr className="my-1 border-gray-600"/>
             { team.map((item,id)=>
