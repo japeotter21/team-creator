@@ -2,12 +2,14 @@ import React, {useState, useEffect} from "react";
 import UserList from "./UserList";
 
 export default function TeamBuilder() {
-    const [teams, setTeams] = useState({team1: [], team2: []})
+    const [team1, setTeam1] = useState([])
+    const [team2, setTeam2] = useState([])
     const [finalArr, setFinalArr] = useState([])
-
+    const [bracket, setBracket] = useState(null)
+    
     useEffect(()=>{
-        console.log(finalArr)
-    },[finalArr])
+        console.log(bracket)
+    },[bracket])
 
     function RandomizeTeams(team1, team2) {
         let temp1 = [...team1]
@@ -88,39 +90,95 @@ export default function TeamBuilder() {
         setFinalArr(finalTeam)
     }
 
+    function GenerateBracket() {
+        let i = 0
+        let roundsCounter = finalArr.length
+        let bracketTemp = []
+        while (roundsCounter >= 1)
+        {
+            i++
+            if(i === 1)
+            {
+                const roundTemp = Array.from({length: roundsCounter},(x,i)=>i)
+                bracketTemp.push(roundTemp)
+            }
+            else
+            {
+                const roundTemp = Array.from({length: roundsCounter},(x,i)=>null)
+                bracketTemp.push(roundTemp)
+            }
+            roundsCounter /= 2
+        }
+        setBracket(bracketTemp)
+    }
+
     return (
         <div className="w-3/4 mx-auto text-center">
-            <div className="flex justify-center gap-2 mt-8">
-                <UserList setTeams={setTeams} teams={teams} firstTeam={true} />
-                <UserList setTeams={setTeams} teams={teams} firstTeam={false} />
-            </div>
-            <button
-                className="mt-6 px-3 py-1 rounded-xl bg-neutral-700 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:shadow-md hover:shadow-green-800
-                    cursor-pointer hover:animate-pulse hover:scale-105 transition duration-500"
-                onClick={()=>RandomizeTeams(teams.team1, teams.team2)}
-            >Randomize</button>
-            <div>
-                {finalArr.length > 0 ?
-                <div>
-                    <hr className="mt-4 mb-2" />
-                    <p className="font-semibold">Teams</p>
-                </div>
-                :
-                    <></>
-                }
-                <div className="grid grid-cols-2">
-                    {finalArr.map((item,id)=>
-                        <div key={id}>
-                            {item[0]} & {item[1]}
+                <>
+                    <div className="flex justify-center gap-2 mt-8">
+                        <UserList setTeam1={setTeam1} team1={team1} setTeam2={setTeam2} team2={team2} firstTeam={true} />
+                        <UserList setTeam1={setTeam2} team1={team2} setTeam2={setTeam1} team2={team1} firstTeam={false} />
+                    </div>
+                    <button
+                        className="mt-6 px-3 py-1 rounded-xl bg-neutral-700 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:shadow-md hover:shadow-green-800
+                            cursor-pointer hover:animate-pulse hover:scale-105 transition duration-500"
+                        onClick={()=>RandomizeTeams(team1, team2)}
+                    >Randomize</button>
+                    <div>
+                        {finalArr.length > 0 ?
+                        <div>
+                            <hr className="mt-4 mb-2" />
+                            <p className="font-semibold">Teams</p>
+                        </div>
+                        :
+                            <></>
+                        }
+                        <div className="grid grid-cols-2">
+                            {finalArr.map((item,id)=>
+                                <div key={id}>
+                                    {item[0]} {item[1] ? <>& {item[1]}</> : <></>}
+                                </div>
+                            )}
+                        </div>
+                        {/* {finalArr.length > 0 ?
+                        <button onClick={GenerateBracket}
+                        className="mt-6 px-3 py-1 rounded-xl bg-neutral-700 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:shadow-md hover:shadow-green-800
+                            cursor-pointer hover:animate-pulse hover:scale-105 transition duration-500 w-full"
+                        >Create Bracket</button> : <></>} */}
+                    </div>
+                </>
+            { bracket !== null ?
+                <div className="flex">
+                    {bracket.map((round,id)=>
+                        <div className="flex flex-col">
+                            {round.map((match,index)=>{
+                                    if(round[index+1] === undefined)
+                                    {
+                                        return (
+                                            <div>
+                                                <p>{match}</p>
+                                            </div>
+                                        )
+                                    }
+                                    else
+                                    {
+                                        return (
+                                            <div>
+                                                <p>{match}</p>
+                                                {index % 2 === 0 ? <p className="text-sm">vs. </p> : <></>}
+                                            </div>
+                                        )
+                                    }
+                                }
+                            )}
                         </div>
                     )}
                 </div>
-                {/* {finalArr.length > 0 ?
-                <button
-                className="mt-6 px-3 py-1 rounded-xl bg-neutral-700 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:shadow-md hover:shadow-green-800
-                    cursor-pointer hover:animate-pulse hover:scale-105 transition duration-500 w-full"
-                >Create Bracket</button> : <></>} */}
-            </div>
+            :
+                <>
+
+                </>
+            }
         </div>
     )
 }

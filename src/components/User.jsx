@@ -10,7 +10,7 @@ export default function User({name, id, team, setTeam}) {
     }
 
     return (
-        <input type="text" placeholder="Enter name..." className="rounded-sm text-sm px-2 py-1 bg-transparent text-white w-full"
+        <input type="text" placeholder="Enter name..." className="rounded-sm text-sm text-center px-2 py-1 bg-transparent text-white w-full"
             onBlur={UpdateTeam}
             value={userName}
             onChange={(e)=>setUserName(e.target.value)}    
