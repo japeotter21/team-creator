@@ -9,10 +9,10 @@ Separate players into 2 lists by an attribute (left-handed/right-handed, boy/gir
 ![Screenshot 2023-09-19 180441](https://github.com/japeotter21/team-creator/assets/97000604/d6668f56-285f-4b30-91be-bd3527dbfc91)
 
 To-Do:
-✅ Add players
-✅ Delete players
-✅ Swap players between lists
-✅ Randomize and pair lists
-⬜ Generate bracket
-⬜ Bracket actions (win/lose, tournament finished)
-⬜ Bracket options (double elimination)
+<p>✅ Add players</p>
+<p>✅ Delete players</p>
+<p>✅ Swap players between lists</p>
+<p>✅ Randomize and pair lists</p>
+<p>⬜ Generate bracket</p>
+<p>⬜ Bracket actions (win/lose, tournament finished)</p>
+<p>⬜ Bracket options (double elimination)</p>
