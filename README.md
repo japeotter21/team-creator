@@ -13,6 +13,3 @@ To-Do:
 <p>✅ Delete players</p>
 <p>✅ Swap players between lists</p>
 <p>✅ Randomize and pair lists</p>
-<p>⬜ Generate bracket</p>
-<p>⬜ Bracket actions (win/lose, tournament finished)</p>
-<p>⬜ Bracket options (double elimination)</p>
